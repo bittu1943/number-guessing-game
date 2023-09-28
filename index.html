@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div style="border: 1px solid black; padding: 2rem;">
+        <h2>Number Guessing game</h2>
+        <p>We have selected a random number between 1 and 100. See if you can guess it in 10 turns or fewer. We'll tell
+            you if your guess was too high or too low.</p>
+
+        
+        <input placeholder="enter your guess" id="userGuess">
+        <button type="button" onclick="play()">submit</button>
+        
+       
+
+        <!-- <button type="submit">submit</button> -->
+
+
+        <p style="background-color: red; color: white; display: none;" id="wrong"><strong>WRONG!</strong></p>
+        <p style="background-color: green; color: white; display: none;" id="right"><strong>RIGHT!</strong></p>
+        <label id="comment"></label>
+
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+ 
+            const computerGenValue = Math.floor(Math.random() * 100) + 1;
+            function play() {
+                
+                const userInput = parseInt(document.getElementById('userGuess').value, 10);
+               
+                if (computerGenValue > userInput) {
+                    document.getElementById("comment").innerHTML = "your number is way too small";
+
+                    document.getElementById("wrong").style.display = "block";
+                } else if (computerGenValue < userInput) {
+                    document.getElementById("comment").innerHTML = "your number is way too big";
+
+                    document.getElementById("wrong").style.display = "block";
+
+                }
+                
+                else if(computerGenValue === userInput){
+                    document.getElementById("comment").innerHTML = `computer generate value: ${computerGenValue},your guess: ${userInput}. you have guessed it right.`
+
+
+                    document.getElementById("right").style.display = "block";
+                    document.getElementById("wrong").style.display = "none";
+                }
+
+                else if(isNaN(userInput)){
+                    document.getElementById("comment").innerHTML = "please enter a valid number.";
+
+                    document.getElementById("wrong").style.display = "block";
+                }
+            }
+
+            window.play = play;
+        });
+
+
+    </script>
+
+
+</body>
+
+</html>
